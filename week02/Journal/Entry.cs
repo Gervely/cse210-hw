@@ -5,7 +5,7 @@ public class Entry
     private string _date;
     private string _prompt;
     private string _response;
-    private string _emotion; // BONUS : champ supplémentaire
+    private string _emotion;
 
     public Entry(string date, string prompt, string response, string emotion = "")
     {

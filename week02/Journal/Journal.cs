@@ -34,7 +34,7 @@ public class Journal
     {
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            outputFile.WriteLine("Date,Prompt,Response,Emotion"); // en-tête CSV
+            outputFile.WriteLine("Date,Prompt,Response,Emotion");
             foreach (Entry entry in _entries)
             {
                 outputFile.WriteLine(entry.ToCsvString());
