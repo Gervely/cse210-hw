@@ -15,7 +15,7 @@ class Program
             Console.WriteLine("2. Display the journal");
             Console.WriteLine("3. Save the journal to a file");
             Console.WriteLine("4. Load the journal from a file");
-            Console.WriteLine("5. Save the journal to CSV (bonus)");
+            Console.WriteLine("5. Save the journal to CSV file");
             Console.WriteLine("6. Quit");
             Console.Write("Choose an option: ");
             choice = int.Parse(Console.ReadLine());
