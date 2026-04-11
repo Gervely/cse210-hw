@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Collections.Generic;
 
 public abstract class Activity
 {
@@ -56,6 +57,24 @@ public abstract class Activity
             Console.Write("\b \b");
         }
         Console.WriteLine();
+    }
+
+    protected string GetRandomPrompt(List<string> prompts, ref List<string> usedPrompts)
+    {
+        if (usedPrompts.Count == prompts.Count)
+        {
+            usedPrompts.Clear(); // Reset after all prompts used
+        }
+
+        Random rand = new Random();
+        string prompt;
+        do
+        {
+            prompt = prompts[rand.Next(prompts.Count)];
+        } while (usedPrompts.Contains(prompt));
+
+        usedPrompts.Add(prompt);
+        return prompt;
     }
 
     public abstract void Run();

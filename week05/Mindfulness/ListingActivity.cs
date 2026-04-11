@@ -11,6 +11,8 @@ public class ListingActivity : Activity
         "Who are some of your personal heroes?"
     };
 
+    private List<string> _usedPrompts = new List<string>();
+
     public ListingActivity() 
         : base("Listing Activity", 
                "This activity will help you reflect on the good things in your life by listing as many as you can.") { }
@@ -18,8 +20,7 @@ public class ListingActivity : Activity
     public override void Run()
     {
         StartMessage();
-        Random rand = new Random();
-        Console.WriteLine(_prompts[rand.Next(_prompts.Count)]);
+        Console.WriteLine(GetRandomPrompt(_prompts, ref _usedPrompts));
         Console.WriteLine("You may begin listing items in 3 seconds...");
         Countdown(3);
 
@@ -28,8 +29,11 @@ public class ListingActivity : Activity
         while (DateTime.Now < endTime)
         {
             Console.Write("Enter item: ");
-            Console.ReadLine();
-            count++;
+            string item = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(item))
+            {
+                count++;
+            }
         }
         Console.WriteLine($"You listed {count} items!");
         EndMessage();

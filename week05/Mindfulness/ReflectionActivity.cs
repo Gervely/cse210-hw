@@ -23,19 +23,21 @@ public class ReflectionActivity : Activity
         "How can you keep this experience in mind in the future?"
     };
 
-    public ReflectionActivity() 
-        : base("Reflection Activity", 
+    private List<string> _usedPrompts = new List<string>();
+    private List<string> _usedQuestions = new List<string>();
+
+    public ReflectionActivity()
+        : base("Reflection Activity",
                "This activity will help you reflect on times in your life when you have shown strength and resilience.") { }
 
     public override void Run()
     {
         StartMessage();
-        Random rand = new Random();
-        Console.WriteLine(_prompts[rand.Next(_prompts.Count)]);
+        Console.WriteLine(GetRandomPrompt(_prompts, ref _usedPrompts));
         DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
         while (DateTime.Now < endTime)
         {
-            Console.WriteLine(_questions[rand.Next(_questions.Count)]);
+            Console.WriteLine(GetRandomPrompt(_questions, ref _usedQuestions));
             ShowSpinner(3);
         }
         EndMessage();

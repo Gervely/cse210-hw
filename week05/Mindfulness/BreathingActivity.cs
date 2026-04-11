@@ -11,10 +11,28 @@ public class BreathingActivity : Activity
         while (DateTime.Now < endTime)
         {
             Console.WriteLine("Breathe in...");
-            Countdown(3);
+            AnimateBreath("INHALE", 4, true);
+            Console.WriteLine("Hold...");
+            ShowSpinner(2);
             Console.WriteLine("Breathe out...");
-            Countdown(3);
+            AnimateBreath("EXHALE", 6, false);
+            Console.WriteLine("Hold...");
+            ShowSpinner(2);
         }
         EndMessage();
+    }
+
+    private void AnimateBreath(string word, int steps, bool growing)
+    {
+        for (int i = growing ? 1 : steps; (growing && i <= steps) || (!growing && i >= 1); i += growing ? 1 : -1)
+        {
+            string breathText = new string(word[0], i);
+            Console.Write(breathText);
+            Thread.Sleep(500);
+            Console.Write(new string('\b', breathText.Length));
+            Console.Write(new string(' ', breathText.Length));
+            Console.Write(new string('\b', breathText.Length));
+        }
+        Console.WriteLine();
     }
 }
