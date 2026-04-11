@@ -1,25 +1,25 @@
 public class Product
 {
-    private string Name;
-    private string ProductId;
-    private double PricePerUnit;
-    private int Quantity;
+    private string _name;
+    private string _productId;
+    private double _pricePerUnit;
+    private int _quantity;
 
     public Product(string name, string productId, double pricePerUnit, int quantity)
     {
-        Name = name;
-        ProductId = productId;
-        PricePerUnit = pricePerUnit;
-        Quantity = quantity;
+        _name = name;
+        _productId = productId;
+        _pricePerUnit = pricePerUnit;
+        _quantity = quantity;
     }
 
     public double GetTotalCost()
     {
-        return PricePerUnit * Quantity;
+        return _pricePerUnit * _quantity;
     }
 
     public string GetPackingInfo()
     {
-        return $"{Name} (ID: {ProductId})";
+        return $"{_name} (ID: {_productId})";
     }
 }
