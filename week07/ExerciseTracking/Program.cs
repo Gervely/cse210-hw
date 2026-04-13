@@ -5,29 +5,26 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create videos
-        Video video1 = new Video("Learning C#", "Alice", 600);
-        video1.AddComment(new Comment("Bob", "Great explanation!"));
-        video1.AddComment(new Comment("Charlie", "Very helpful, thanks."));
-        video1.AddComment(new Comment("Dana", "Can you cover inheritance next?"));
+        // Create different activities
+        List<Activity> activities = new List<Activity>();
 
-        Video video2 = new Video("Cooking Pasta", "Chef Mario", 300);
-        video2.AddComment(new Comment("Luca", "Looks delicious!"));
-        video2.AddComment(new Comment("Sophia", "I tried this recipe, amazing."));
-        video2.AddComment(new Comment("Marco", "Can you show gluten-free options?"));
+        // Running activity
+        Running running = new Running("03 Nov 2022", 30, 3.0); // 30 min, 3 miles
+        activities.Add(running);
 
-        Video video3 = new Video("Travel Vlog: Paris", "Emily", 900);
-        video3.AddComment(new Comment("Anna", "Beautiful shots of the Eiffel Tower."));
-        video3.AddComment(new Comment("James", "I want to visit Paris now!"));
-        video3.AddComment(new Comment("Olivia", "Loved the editing style."));
+        // Cycling activity
+        Cycling cycling = new Cycling("04 Nov 2022", 45, 15.0); // 45 min, 15 mph
+        activities.Add(cycling);
 
-        // Store videos in a list
-        List<Video> videos = new List<Video> { video1, video2, video3 };
+        // Swimming activity
+        Swimming swimming = new Swimming("05 Nov 2022", 60, 20); // 60 min, 20 laps
+        activities.Add(swimming);
 
-        // Display information for each video
-        foreach (Video v in videos)
+        // Display summary for each activity
+        foreach (Activity activity in activities)
         {
-            v.DisplayVideoInfo();
+            Console.WriteLine(activity.GetSummary());
+            Console.WriteLine();
         }
     }
 }
