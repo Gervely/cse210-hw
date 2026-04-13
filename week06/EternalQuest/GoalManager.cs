@@ -43,9 +43,48 @@ public class GoalManager
         }
     }
 
-    public void ShowScore()
+    public int GetGoalCount()
     {
-        Console.WriteLine($"Current Score: {_score} | Level: {_level}");
+        return _goals.Count;
+    }
+
+    public void ShowDetailedStats()
+    {
+        Console.WriteLine($"\n📊 Detailed Statistics 📊");
+        Console.WriteLine($"Total Score: {_score} points");
+        Console.WriteLine($"Current Level: {_level}");
+        Console.WriteLine($"Points to next level: {_level * 1000 - _score}");
+        Console.WriteLine($"Total Goals: {_goals.Count}");
+
+        int completedSimple = 0;
+        int totalChecklist = 0;
+        int completedChecklist = 0;
+
+        foreach (Goal g in _goals)
+        {
+            if (g is SimpleGoal sg && sg.IsComplete())
+                completedSimple++;
+            else if (g is ChecklistGoal cg)
+            {
+                totalChecklist++;
+                if (cg.GetDetailsString().Contains("[X]"))
+                    completedChecklist++;
+            }
+        }
+
+        Console.WriteLine($"Completed Simple Goals: {completedSimple}");
+        Console.WriteLine($"Completed Checklist Goals: {completedChecklist}/{totalChecklist}");
+
+        if (_goals.Count > 0)
+        {
+            double completionRate = ((double)(completedSimple + completedChecklist) / _goals.Count) * 100;
+            Console.WriteLine($"Overall Completion Rate: {completionRate:F1}%");
+        }
+
+        // Achievement badges
+        if (_score >= 100) Console.WriteLine("🏆 Achievement Unlocked: Century Club!");
+        if (_level >= 5) Console.WriteLine("⭐ Achievement Unlocked: Goal Master!");
+        if (completedChecklist >= 3) Console.WriteLine("🎯 Achievement Unlocked: Checklist Champion!");
     }
 
     public void SaveGoals(string filename)
